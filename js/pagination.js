@@ -166,7 +166,9 @@ $(window).load(function() {
             location.reload();
         } else if ($(this).text() === '...') {
 
-        } else {
+        } else if (parseInt($(this).find('a').attr('href').substring(6), 10) === pageNow) {
+
+        }else {
             window.location = window.location.pathname + "#page=" + parseInt($(this).find('a').attr('href').substring(6), 10);
             location.reload();
         }
