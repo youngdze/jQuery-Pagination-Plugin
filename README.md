@@ -1,4 +1,4 @@
-JavaScript 分页程序
+JQuery 分页程序
 ===
 
 用法：
