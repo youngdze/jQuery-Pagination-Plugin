@@ -24,13 +24,17 @@ p {
 }
 
 .pagewrapper {
-  max-width: 550px;
+  max-width: 730px;
   margin: 0 auto;
   padding: 20px 50px;
 }
 
 .pagination-wrapper {
   text-align: center;
+}
+
+.code {
+  background-color: rgba(255,255, 255, 1);
 }
 
 /* hr */

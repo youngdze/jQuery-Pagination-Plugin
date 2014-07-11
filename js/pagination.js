@@ -2,116 +2,115 @@
 
     // generate pagination quene
     var Pagination = function(total, currentPage) {
-
         this.total = total;
         this.currentPage = currentPage;
+    }
 
-        this.generate = function() {
+    Pagination.prototype.generate = function() {
 
-            try {
+        try {
 
-                // validate if both are positive integers
-                function isInteger(data) {
-                    var exgInt = /^\+?(0|[1-9])\d*$/;
-                    return exgInt.test(data);
-                }
+            // validate if both are positive integers
+            function isInteger(data) {
+                var exgInt = /^\+?(0|[1-9])\d*$/;
+                return exgInt.test(data);
+            }
 
-                if (!(isInteger(this.total) || isInteger(this.currentPage))) {
-                    throw 'positive integers required';
-                }
+            if (!(isInteger(this.total) || isInteger(this.currentPage))) {
+                throw 'positive integers required';
+            }
 
-                if (this.currentPage > this.total) {
-                    throw 'current index of page cannot bigger than the total number of pages';
-                }
+            if (this.currentPage > this.total) {
+                throw 'current index of page cannot bigger than the total number of pages';
+            }
 
-                var pageButton = [];
+            var pageButton = [];
 
-                // The first situation
-                if (this.currentPage < 6) {
-                    for (var i = 1; i <= this.total; i++) {
-                        if (i <= (this.currentPage + 2)) {
-                            pageButton.push(i);
-                        } else if (Math.abs(((this.currentPage + 2) - this.total)) < 2) {
-                            pageButton.push(i);
-                            if (i === this.total) {
-                                break;
-                            }
-                        } else if (i === this.total) {
-                            pageButton.push('...');
-                            pageButton.push(this.total);
-                        } else {
-                            continue;
+            // The first situation
+            if (this.currentPage < 6) {
+                for (var i = 1; i <= this.total; i++) {
+                    if (i <= (this.currentPage + 2)) {
+                        pageButton.push(i);
+                    } else if (Math.abs(((this.currentPage + 2) - this.total)) < 2) {
+                        pageButton.push(i);
+                        if (i === this.total) {
+                            break;
                         }
+                    } else if (i === this.total) {
+                        pageButton.push('...');
+                        pageButton.push(this.total);
+                    } else {
+                        continue;
                     }
                 }
+            }
 
-                // The second situation
-                else if (this.currentPage >= 6 && this.currentPage <= (this.total - 5)) {
-                    for (var i = 1; i <= this.total; i++) {
-                        if (i === 1) {
-                            pageButton.push(1);
-                            pageButton.push('...');
-                        } else if (i < (this.currentPage - 2)) {
-                            continue;
-                        } else if (i >= (this.currentPage - 2) && i <= (this.currentPage + 2)) {
-                            pageButton.push(i);
-                        } else if (i > (this.currentPage + 2) && i < this.total) {
-                            continue;
-                        } else if (i === this.total) {
-                            pageButton.push('...');
-                            pageButton.push(i);
-                        }
+            // The second situation
+            else if (this.currentPage >= 6 && this.currentPage <= (this.total - 5)) {
+                for (var i = 1; i <= this.total; i++) {
+                    if (i === 1) {
+                        pageButton.push(1);
+                        pageButton.push('...');
+                    } else if (i < (this.currentPage - 2)) {
+                        continue;
+                    } else if (i >= (this.currentPage - 2) && i <= (this.currentPage + 2)) {
+                        pageButton.push(i);
+                    } else if (i > (this.currentPage + 2) && i < this.total) {
+                        continue;
+                    } else if (i === this.total) {
+                        pageButton.push('...');
+                        pageButton.push(i);
                     }
                 }
+            }
 
-                // The third situation
-                else if (this.currentPage > (this.total - 5)) {
-                    for (var i = 1; i <= this.total; i++) {
-                        if (i === 1) {
-                            pageButton.push(1);
-                            pageButton.push('...');
-                        } else if (i < (this.currentPage - 2)) {
-                            continue;
-                        } else {
-                            pageButton.push(i);
-                        }
+            // The third situation
+            else if (this.currentPage > (this.total - 5)) {
+                for (var i = 1; i <= this.total; i++) {
+                    if (i === 1) {
+                        pageButton.push(1);
+                        pageButton.push('...');
+                    } else if (i < (this.currentPage - 2)) {
+                        continue;
+                    } else {
+                        pageButton.push(i);
                     }
                 }
+            }
 
-                if (this.currentPage === 1) {
-                    if (this.total !== 1) {
-                        pageButton.push('next');
-                    }
-                } else if (this.currentPage === this.total) {
-                    pageButton.splice(0, 0, 'pre');
-                } else {
-                    pageButton.splice(0, 0, 'pre');
+            if (this.currentPage === 1) {
+                if (this.total !== 1) {
                     pageButton.push('next');
                 }
-
-                return pageButton;
-
-            } catch (err) {
-                console.log('Error: ' + err + ".");
+            } else if (this.currentPage === this.total) {
+                pageButton.splice(0, 0, 'pre');
+            } else {
+                pageButton.splice(0, 0, 'pre');
+                pageButton.push('next');
             }
-        };
-    }
+
+            return pageButton;
+
+        } catch (err) {
+            console.log('Error: ' + err + ".");
+        }
+    };
+
 
     // generate normal element
     var Element = function(nodeName, text) {
-
         this.nodeName = nodeName;
         this.text = text;
-
-        this.generate = function() {
-
-            var newElement = document.createElement(this.nodeName);
-            var newContent = document.createTextNode(this.text);
-            newElement.appendChild(newContent);
-
-            return newElement;
-        }
     }
+
+    Element.prototype.generate = function() {
+        var newElement = document.createElement(this.nodeName);
+        var newContent = document.createTextNode(this.text);
+        newElement.appendChild(newContent);
+
+        return newElement;
+    }
+
 
     var renderPage = function(totalPage, currentPage) {
 
@@ -158,15 +157,18 @@
         return ul;
     }
 
-    $.fn.pagination = function(option) {
+    $.fn.pagination = function(setting) {
 
-        var _default = 20;
-        var $this = $(this);
+        var $this = $(this),
+            defaults = {
+                totalPage: 20,
+                callback: null
+            };
 
-        _default = option ? option : _default;
+        var config = $.extend(defaults, setting);
 
         var pageNow = parseInt(location.hash.substring(6), 10) ? parseInt(location.hash.substring(6), 10) : 1;
-        $this.html(renderPage(_default, pageNow));
+        $this.html(renderPage(config.totalPage, pageNow));
 
         (function selectPage() {
             var _li = $('.pagination').find('li');
@@ -175,17 +177,30 @@
                 if (_this.hasClass('pagePre')) {
                     pageNow--;
                     location.hash = "#page=" + pageNow;
-                    $this.html(renderPage(_default, pageNow));
+                    $this.html(renderPage(config.totalPage, pageNow));
+                    
+                    // callback
+                    if (typeof config.callback === 'function') {
+                        config.callback.call(this);
+                    }
                 } else if (_this.hasClass('pageNext')) {
                     pageNow++;
                     location.hash = "#page=" + pageNow;
-                    $this.html(renderPage(_default, pageNow));
+                    $this.html(renderPage(config.totalPage, pageNow));
+                    // callback
+                    if (typeof config.callback === 'function') {
+                        config.callback.call(this);
+                    }
                 } else if (_this.text() === '...') {
 
                 } else {
                     pageNow = parseInt(_this.find('a').attr('href').substring(6), 10);
                     location.hash = "#page=" + pageNow;
-                    $this.html(renderPage(_default, pageNow));
+                    $this.html(renderPage(config.totalPage, pageNow));
+                    // callback
+                    if (typeof config.callback === 'function') {
+                        config.callback.call(this);
+                    }
                 }
             });
         })();

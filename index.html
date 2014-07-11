@@ -16,9 +16,16 @@
     <div class="pagewrapper">
       
       <h1>jQuery 分页插件</h1>
+      <h2>当前页面：<i class="current-page"></i></h2>
       <h2>用法：</h2>
-      <p>$(selector).pagination()</p>
-      <p>.pagination() 可以接受一个正整数参数作为总页数，无参数时总页数默认为 20。</p>
+      <pre class="code">
+$(selector).pagination({
+  totalPage: 50,
+  callback: function(){
+    $('.current-page').text(parseInt(location.hash.substring(6), 10)
+  }
+});</pre>
+      <p>.pagination() 可以自行配置两个地方，一个是总页数，默认为 20，一个是回调函数，在点击页码事件发生后回调的函数，默认为 NULL。</p>
       <p>当前页面由 location.hash 控制，location.hash 为空时当前页面为 1。</p>
 
       <div class="pagination-wrapper"></div>
@@ -28,10 +35,16 @@
     </div>
 
     <script src="js/jquery.min.js?ver=1.6.2"></script>
-    <script src="js/pagination.js"></script>
+    <script src="js/pagination.min.js"></script>
     <script>
       $(function(){
-        $('.pagination-wrapper').pagination(50);
+        $('.current-page').text(parseInt(location.hash.substring(6), 10));
+        $('.pagination-wrapper').pagination({
+          totalPage: 50,
+          callback: function(){
+            $('.current-page').text(parseInt(location.hash.substring(6), 10))
+          }
+        });
       });
     </script>
   </body>
