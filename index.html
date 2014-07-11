@@ -38,7 +38,7 @@ $(selector).pagination({
     <script src="js/pagination.min.js"></script>
     <script>
       $(function(){
-        $('.current-page').text(parseInt(location.hash.substring(6), 10));
+        $('.current-page').text(parseInt(location.hash.substring(6), 10) || 1);
         $('.pagination-wrapper').pagination({
           totalPage: 50,
           callback: function(){

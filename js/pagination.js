@@ -167,7 +167,7 @@
 
         var config = $.extend(defaults, setting);
 
-        var pageNow = parseInt(location.hash.substring(6), 10) ? parseInt(location.hash.substring(6), 10) : 1;
+        var pageNow = parseInt(location.hash.substring(6), 10) || 1;
         $this.html(renderPage(config.totalPage, pageNow));
 
         (function selectPage() {
