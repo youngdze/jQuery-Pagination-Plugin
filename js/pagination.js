@@ -170,7 +170,7 @@
         var pageNow = parseInt(location.hash.substring(6), 10) || 1;
         $this.html(renderPage(config.totalPage, pageNow));
 
-        (function selectPage() {
+        (function() {
             var _li = $('.pagination').find('li');
             _li.live('click', function() {
                 var _this = $(this);
