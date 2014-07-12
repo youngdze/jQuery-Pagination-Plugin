@@ -180,15 +180,17 @@
                     $this.html(renderPage(config.totalPage, pageNow));
                     
                     // callback
-                    typeof callback === 'function' &&callback(pageNow);
-
+                    if (typeof config.callback === 'function') {
+                        config.callback(pageNow);
+                    }
                 } else if (_this.hasClass('pageNext')) {
                     pageNow++;
                     location.hash = "#page=" + pageNow;
                     $this.html(renderPage(config.totalPage, pageNow));
                     // callback
-                    typeof callback === 'function' &&callback(pageNow);
-
+                    if (typeof config.callback === 'function') {
+                        config.callback(pageNow);
+                    }
                 } else if (_this.text() === '...') {
 
                 } else {
@@ -196,8 +198,9 @@
                     location.hash = "#page=" + pageNow;
                     $this.html(renderPage(config.totalPage, pageNow));
                     // callback
-                    typeof callback === 'function' &&callback(pageNow);
-                    
+                    if (typeof config.callback === 'function') {
+                        config.callback(pageNow);
+                    }
                 }
             });
         })();
