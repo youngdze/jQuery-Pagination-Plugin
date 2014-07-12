@@ -21,7 +21,7 @@
       <pre class="code">
 $(selector).pagination({
   totalPage: 50,
-  callback: function(){
+  callback: function(currentPage){
     $('.current-page').text(currentPage)
   }
 });</pre>
@@ -43,8 +43,8 @@ $(selector).pagination({
         $('.current-page').text(parseInt(location.hash.substring(6), 10) || 1);
         $('.pagination-wrapper').pagination({
           totalPage: 50,
-          callback: function(v){
-            $('.current-page').text(v)
+          callback: function(currentPage){
+            $('.current-page').text(currentPage)
           }
         });
       });

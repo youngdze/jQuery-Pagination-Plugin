@@ -7,7 +7,7 @@ jQuery 分页插件
 ```javascript
 $(selector).pagination({
   totalPage: 50,
-  callback: function(){
+  callback: function(currentPage){
     $('.current-page').text(currentPage)
   }
 });
