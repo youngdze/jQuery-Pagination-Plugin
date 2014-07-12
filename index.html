@@ -51,3 +51,57 @@ $(selector).pagination({
     </script>
   </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagination</title>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="js/html5.min.js?ver=3.7.2"></script>
+    <script type="text/javascript" src="js/response.min.js?ver=0.9.0"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="css/bootstrap.min.css?ver=3.0.0">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+
+  <body>
+    <div class="pagewrapper">
+      
+      <h1>jQuery 分页插件</h1>
+      <h2>当前页面：<i class="current-page"></i></h2>
+      <h2>用法：</h2>
+      <pre class="code">
+$(selector).pagination({
+  totalPage: 50,
+  callback: function(currentPage){
+    $('.current-page').text(currentPage)
+  }
+});</pre>
+      <p>.pagination() 可以自行配置两个地方，一个是总页数，默认为 20，一个是回调函数，在点击页码事件发生后回调的函数，回调函数可以接受一个参数，这个参数为当前页码。</p>
+      <p>当前页面由 location.hash 控制，location.hash 为空时当前页面为 1。</p>
+
+      <div class="pagination-wrapper"></div>
+
+      <a href="https://github.com/youngdze/Pagination">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png">
+      </a>
+
+    </div>
+
+    <script src="js/jquery.min.js?ver=1.6.2"></script>
+    <script src="js/pagination.min.js"></script>
+    <script>
+      $(function(){
+        $('.current-page').text(parseInt(location.hash.substring(6), 10) || 1);
+        $('.pagination-wrapper').pagination({
+          totalPage: 50,
+          callback: function(currentPage){
+            $('.current-page').text(currentPage)
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
