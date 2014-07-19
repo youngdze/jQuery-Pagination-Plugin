@@ -1,27 +1,28 @@
 (function($, window, document, undefined) {
 
+    "use strict";
+
     // generate pagination quene
     var Pagination = function(total, currentPage) {
         this.total = total;
         this.currentPage = currentPage;
-    }
+    };
 
     Pagination.prototype.generate = function() {
 
+        // validate if both are positive integers
+        function isInteger(data) {
+            var exgInt = /^\+?(0|[1-9])\d*$/;
+            return exgInt.test(data);
+        }
+
         try {
-
-            // validate if both are positive integers
-            function isInteger(data) {
-                var exgInt = /^\+?(0|[1-9])\d*$/;
-                return exgInt.test(data);
-            }
-
             if (!(isInteger(this.total) || isInteger(this.currentPage))) {
-                throw 'positive integers required';
+                throw "positive integers required";
             }
 
             if (this.currentPage > this.total) {
-                throw 'current index of page cannot bigger than the total number of pages';
+                throw "current index of page cannot bigger than the total number of pages";
             }
 
             var pageButton = [];
@@ -165,44 +166,50 @@
                 callback: null
             };
 
-        var config = $.extend(defaults, setting);
+        var config = $.extend(defaults, setting),
+            pageNow = parseInt(location.hash.substring(6), 10) || 1,
+            jQuery_ver = $.fn.jquery.substr(0, 3) * 10;
 
-        var pageNow = parseInt(location.hash.substring(6), 10) || 1;
+        var dynamicGenerate = function() {
+            var $li = $(this);
+            if ($li.hasClass('pagePre')) {
+                pageNow--;
+                location.hash = "#page=" + pageNow;
+                $this.html(renderPage(config.totalPage, pageNow));
+
+                // callback
+                if (typeof config.callback === 'function') {
+                    config.callback(pageNow);
+                }
+            } else if ($li.hasClass('pageNext')) {
+                pageNow++;
+                location.hash = "#page=" + pageNow;
+                $this.html(renderPage(config.totalPage, pageNow));
+                // callback
+                if (typeof config.callback === 'function') {
+                    config.callback(pageNow);
+                }
+            } else if ($li.text() === '...') {
+
+            } else {
+                pageNow = parseInt($li.find('a').attr('href').substring(6), 10);
+                location.hash = "#page=" + pageNow;
+                $this.html(renderPage(config.totalPage, pageNow));
+                // callback
+                if (typeof config.callback === 'function') {
+                    config.callback(pageNow);
+                }
+            }
+        };
+
         $this.html(renderPage(config.totalPage, pageNow));
 
-        (function() {
-            var _li = $('.pagination').find('li');
-            _li.live('click', function() {
-                var _this = $(this);
-                if (_this.hasClass('pagePre')) {
-                    pageNow--;
-                    location.hash = "#page=" + pageNow;
-                    $this.html(renderPage(config.totalPage, pageNow));
-                    
-                    // callback
-                    if (typeof config.callback === 'function') {
-                        config.callback(pageNow);
-                    }
-                } else if (_this.hasClass('pageNext')) {
-                    pageNow++;
-                    location.hash = "#page=" + pageNow;
-                    $this.html(renderPage(config.totalPage, pageNow));
-                    // callback
-                    if (typeof config.callback === 'function') {
-                        config.callback(pageNow);
-                    }
-                } else if (_this.text() === '...') {
-
-                } else {
-                    pageNow = parseInt(_this.find('a').attr('href').substring(6), 10);
-                    location.hash = "#page=" + pageNow;
-                    $this.html(renderPage(config.totalPage, pageNow));
-                    // callback
-                    if (typeof config.callback === 'function') {
-                        config.callback(pageNow);
-                    }
-                }
-            });
+        (function selectPage() {
+            if (jQuery_ver < 17) {
+                $(document).delegate('.pagination li', 'click', dynamicGenerate);
+            } else {
+                $(document).on('click', '.pagination li', dynamicGenerate);
+            }
         })();
 
     }
