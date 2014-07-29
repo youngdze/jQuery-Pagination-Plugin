@@ -4,13 +4,13 @@
 
 Basically use [Boostrap][1] CSS styles and markup. You can also use your own CSS styles.
 
-```css
+```html
 <link rel="stylesheet" href="boostrap.min.css">
 ```
 
 Include jQuery and the plugin on a page.
 
-```javascript
+```html
 <script src="jquery.min.js"></script>
 <script src="jquery.yzePagination.min.js"></script>
 ```
