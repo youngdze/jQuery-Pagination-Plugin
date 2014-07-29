@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 
         watch: {
             scripts: {
-                files: ['./js/pagination.js'],
+                files: ['./js/jquery.yzePagination.js'],
                 tasks: ['uglify'],
                 options: {
                     spawn: false,
@@ -15,7 +15,7 @@ module.exports = function(grunt) {
         uglify: {
             my_target: {
                 files: {
-                    './js/pagination.min.js': ['./js/pagination.js']
+                    './js/jquery.yzePagination.min.js': ['./js/jquery.yzePagination.js']
                 }
             }
         },

@@ -1,8 +1,21 @@
-jQuery 分页插件
-===
+#jQuery Pagination Plugin
 
-用法：
----
+##Basic usage
+
+Basically use [Boostrap][1] CSS styles and markup. You can also use your own CSS styles.
+
+```css
+<link rel="stylesheet" href="boostrap.min.css">
+```
+
+Include jQuery and the plugin on a page.
+
+```javascript
+<script src="jquery.min.js"></script>
+<script src="jquery.yzePagination.min.js"></script>
+```
+
+The following codes show call the function on `<div>` tag:
 
 ```javascript
 $(selector).pagination({
@@ -12,7 +25,31 @@ $(selector).pagination({
   }
 });
 ```
+###Changelog
 
-.pagination() 可以自行配置两个地方，一个是总页数，默认为 20，一个是回调函数，在点击页码事件发生后回调的函数，回调函数可以接受一个参数，这个参数为当前页码。
+v1.3.2
 
-当前页面由 location.hash 控制，location.hash 为空时当前页面为 1。
+* Use `parseFload($.fn.jquery, 1)` to comfirm jQuery version. For jQuery version lower than 1.7 use `delegate` method and for higher version use `on` method.
+
+###License
+
+Copyright © 2014 Justin Young Licensed under the MIT license.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1]: http://getbootstrap.com/
