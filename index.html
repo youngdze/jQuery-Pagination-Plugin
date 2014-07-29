@@ -15,9 +15,9 @@
   <body>
     <div class="pagewrapper">
       
-      <h1>jQuery 分页插件</h1>
-      <h2>当前页面：<i class="current-page"></i></h2>
-      <h2>用法：</h2>
+      <h1>jQuery Pagination Plugin</h1>
+      <h2>Current Page：<i class="current-page"></i></h2>
+      <h2>Usage：</h2>
       <pre class="code">
 $(selector).pagination({
   totalPage: 50,
@@ -25,8 +25,7 @@ $(selector).pagination({
     $('.current-page').text(currentPage)
   }
 });</pre>
-      <p>.pagination() 可以自行配置两个地方，一个是总页数，默认为 20，一个是回调函数，在点击页码事件发生后回调的函数，回调函数可以接受一个参数，这个参数为当前页码。</p>
-      <p>当前页面由 location.hash 控制，location.hash 为空时当前页面为 1。</p>
+      <p>You can configure the number of total pages and add callback function.</p>
 
       <div class="pagination-wrapper"></div>
 
@@ -37,7 +36,7 @@ $(selector).pagination({
     </div>
 
     <script src="js/jquery.min.js?ver=1.9.1"></script>
-    <script src="js/pagination.min.js"></script>
+    <script src="js/jquery.yzePagination.min.js?ver=1.3.2"></script>
     <script>
       $(function(){
         $('.current-page').text(parseInt(location.hash.substring(6), 10) || 1);

@@ -1,3 +1,12 @@
+/**
+ * jQuery pagination plugin v1.3.2
+ * http://youngdze.github.io/Pagination
+ *
+ * Copyright (c) 2014 Justin Young
+ * Licensed under the MIT License.
+ * 
+ */
+;
 (function($, window, document, undefined) {
 
     "use strict";
@@ -81,13 +90,13 @@
 
             if (this.currentPage === 1) {
                 if (this.total !== 1) {
-                    pageButton.push('next');
+                    pageButton.push('Next');
                 }
             } else if (this.currentPage === this.total) {
-                pageButton.splice(0, 0, 'pre');
+                pageButton.splice(0, 0, 'Pre');
             } else {
-                pageButton.splice(0, 0, 'pre');
-                pageButton.push('next');
+                pageButton.splice(0, 0, 'Pre');
+                pageButton.push('Next');
             }
 
             return pageButton;
@@ -130,15 +139,15 @@
             var li = li_element.generate();
             var a = a_element.generate();
 
-            if (pageQuene[i] === 'pre' || pageQuene[i] === 'next' || pageQuene[i] === '...') {
+            if (pageQuene[i] === 'Pre' || pageQuene[i] === 'Next' || pageQuene[i] === '...') {
                 a.setAttribute('href', 'javascript:void(0)');
 
-                if (pageQuene[i] === 'pre') {
+                if (pageQuene[i] === 'Pre') {
                     li.setAttribute('class', 'pagePre');
-                } else if (pageQuene[i] === 'next') {
+                } else if (pageQuene[i] === 'Next') {
                     li.setAttribute('class', 'pageNext');
                 } else {
-                    a.setAttribute('style', 'cursor: not-allowed;');
+                    li.setAttribute('class', 'disabled');
                 }
 
             } else {
@@ -167,10 +176,19 @@
             };
 
         var config = $.extend(defaults, setting),
-            pageNow = parseInt(location.hash.substring(6), 10) || 1,
-            jQuery_ver = $.fn.jquery.substr(0, 3) * 10;
+            pageNow = parseInt(location.hash.substring(6), 10) || 1;
 
-        var dynamicGenerate = function() {
+        $this.html(renderPage(config.totalPage, pageNow));
+
+        (function selectPage() {
+            if (parseFloat($.fn.jquery, 1) < 1.7) {
+                $(document).delegate('.pagination li', 'click', select_page_fn);
+            } else {
+                $(document).on('click', '.pagination li', select_page_fn);
+            }
+        })();
+
+        function select_page_fn() {
             var $li = $(this);
             if ($li.hasClass('pagePre')) {
                 pageNow--;
@@ -200,18 +218,7 @@
                     config.callback(pageNow);
                 }
             }
-        };
-
-        $this.html(renderPage(config.totalPage, pageNow));
-
-        (function selectPage() {
-            if (jQuery_ver < 17) {
-                $(document).delegate('.pagination li', 'click', dynamicGenerate);
-            } else {
-                $(document).on('click', '.pagination li', dynamicGenerate);
-            }
-        })();
-
+        }
     }
 
 })(jQuery, window, document);
