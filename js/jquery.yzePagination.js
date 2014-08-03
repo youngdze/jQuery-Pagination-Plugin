@@ -102,7 +102,7 @@
             return pageButton;
 
         } catch (err) {
-            console.log('Error: ' + err + ".");
+            console.error('Error: ' + err + ".");
         }
     };
 
