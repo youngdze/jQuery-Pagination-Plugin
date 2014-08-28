@@ -1,6 +1,6 @@
 /**
  * jQuery pagination plugin v1.3.2
- * http://youngdze.github.io/Pagination
+ * https://github.com/youngdze/jQuery-Pagination-Plugin
  *
  * Copyright (c) 2014 Justin Young
  * Licensed under the MIT License.
@@ -175,7 +175,7 @@
                 callback: null
             };
 
-        var config = $.extend(defaults, setting),
+        var config = $.extend({}, defaults, setting),
             pageNow = parseInt(location.hash.substring(6), 10) || 1;
 
         $this.html(renderPage(config.totalPage, pageNow));

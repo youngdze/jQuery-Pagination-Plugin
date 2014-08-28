@@ -2,10 +2,10 @@
 
 ##Basic usage
 
-Basically use [Boostrap][1] CSS styles and markup. You can also use your own CSS styles.
+Basically use [Bootstrap][1] CSS styles and markup. You can also use your own CSS styles.
 
 ```html
-<link rel="stylesheet" href="boostrap.min.css">
+<link rel="stylesheet" href="bootstrap.min.css">
 ```
 
 Include jQuery and the plugin on a page.
